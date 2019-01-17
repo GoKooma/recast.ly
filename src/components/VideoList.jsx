@@ -3,7 +3,7 @@ import VideoListEntry from './VideoListEntry.js';
 
 var VideoList = (props) => (
   <div className="video-list">
-    {props.videos.map((video, index) => <VideoListEntry video={video} key={index} />)}
+    {props.videos.map((video, index) => <VideoListEntry video={video} index={index} key={index} videoSelector={props.videoSelector} />)}
   </div>
 );
 //example format
@@ -17,3 +17,5 @@ VideoList.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope.
 // `var` declarations will only exist globally where explicitly defined.
 export default VideoList;
+
+//test
