@@ -4,16 +4,21 @@ import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      aState: false,
+      videos: exampleVideoData,
       videoNum: 0,
 
     };
   }
 
-  chooseVideo (index) {
+  updateVideos(videos) {
+    this.setState({ videos });
+    this.chooseVideo(0);
+  }
+
+  chooseVideo(index) {
     this.setState({
       videoNum: index
     });
@@ -24,17 +29,17 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search searchYouTube={this.props.searchYouTube} updateVideos={this.updateVideos.bind(this)}/>
             {/* <div><h5><em>search</em> view goes here</h5></div> */}
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={exampleVideoData[this.state.videoNum]} />
+            <VideoPlayer video={this.state.videos[this.state.videoNum]} />
             {/* <div><h5><em>videoPlayer</em> view goes here</h5></div> */}
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideoData} videoSelector={this.chooseVideo.bind(this)} />
+            <VideoList videos={this.state.videos} videoSelector={this.chooseVideo.bind(this)} />
             {/* <div><h5><em>videoList</em> view goes here</h5></div> */}
           </div>
         </div>
